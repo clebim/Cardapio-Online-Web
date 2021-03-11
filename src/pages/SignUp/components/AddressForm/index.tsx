@@ -1,20 +1,16 @@
 import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { FiHome, FiLock, FiMail } from 'react-icons/fi';
+import { FaRoad, FaSortNumericUp, FaMapMarker, FaCity } from 'react-icons/fa';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
-import { FormProps } from '../..';
 import { ButtonBack, ContainerButtons } from './styles';
 import { AnimatedContainer } from '../../styles';
+import { useRegister } from '../../../../contexts/RegisterContext';
 
-const AddressForm: React.FC<FormProps> = ({
-  setFormIndex,
-  formIndex,
-  setFromBack,
-  fromBack,
-}) => {
+const AddressForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { setFormIndex, formIndex, fromBack, setFromBack } = useRegister();
 
   const handleBackForm = useCallback(() => {
     setFromBack(true);
@@ -33,30 +29,30 @@ const AddressForm: React.FC<FormProps> = ({
         <Input
           type="text"
           placeholder="Cidade"
-          icon={FiHome}
-          id="restaurant_name"
-          name="restaurantName"
+          icon={FaCity}
+          id="city"
+          name="city"
         />
         <Input
           type="text"
-          id="email"
-          icon={FiMail}
+          id="neighborhood"
+          icon={FaMapMarker}
           placeholder="Bairro"
-          name="email"
+          name="neighborhood"
         />
         <Input
-          type="password"
-          id="password"
-          icon={FiLock}
+          type="text"
+          id="street"
+          icon={FaRoad}
           placeholder="Rua"
-          name="password"
+          name="street"
         />
         <Input
-          type="password"
-          id="password_confirmation"
-          icon={FiLock}
+          type="text"
+          id="number"
+          icon={FaSortNumericUp}
           placeholder="Numero"
-          name="passwordConfirmation"
+          name="number"
         />
 
         <ContainerButtons>

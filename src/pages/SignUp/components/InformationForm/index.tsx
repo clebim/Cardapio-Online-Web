@@ -1,29 +1,28 @@
 import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { FiHome, FiMail } from 'react-icons/fi';
+import { FaPhone, FaMapPin } from 'react-icons/fa';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
-import { FormProps } from '../..';
 import { AnimatedContainer } from '../../styles';
 import { ButtonBack, ContainerButtons } from '../AddressForm/styles';
+import { useRegister } from '../../../../contexts/RegisterContext';
 
-const InformationForm: React.FC<FormProps> = ({
-  setFormIndex,
-  setFromBack,
-  fromBack,
-  formIndex,
-}) => {
+const InformationForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { setFormIndex, formIndex, fromBack, setFromBack } = useRegister();
 
   const handleBackForm = useCallback(() => {
     setFromBack(true);
     setFormIndex(formIndex - 1);
   }, [setFormIndex, formIndex, setFromBack]);
 
-  const handleSubmit = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const handleSubmit = useCallback(
+    (data) => {
+      setFromBack(false);
+    },
+    [setFromBack],
+  );
 
   return (
     <AnimatedContainer from={fromBack}>
@@ -31,17 +30,17 @@ const InformationForm: React.FC<FormProps> = ({
         <h1>Dados Adicionais</h1>
         <Input
           type="text"
-          placeholder="Nome do restaurante"
-          icon={FiHome}
-          id="restaurant_name"
-          name="restaurantName"
+          placeholder="Telefone de contato"
+          icon={FaPhone}
+          id="phone"
+          name="phone"
         />
         <Input
           type="text"
-          id="email"
-          icon={FiMail}
-          placeholder="Email"
-          name="email"
+          id="zipCode"
+          icon={FaMapPin}
+          placeholder="CEP"
+          name="zipCode"
         />
 
         <ContainerButtons>

@@ -13,46 +13,11 @@ import { Container, Content, Background, Step, NumberStep } from './styles';
 import LoginForm from './components/LoginForm';
 import AddressForm from './components/AddressForm';
 import InformationForm from './components/InformationForm';
+import { useRegister } from '../../contexts/RegisterContext';
 
-export interface FormProps {
-  formIndex: number;
-  setFormIndex: React.Dispatch<React.SetStateAction<number>>;
-  fromBack: boolean;
-  setFromBack: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface LoginProps {
-  restaurantName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
 const SignUp: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
-  const [formIndex, setFormIndex] = useState(0);
-  const [fromBack, setFromBack] = useState(false);
-  const [values, setValues] = useState({});
-
-  const forms = [
-    <LoginForm
-      setFormIndex={setFormIndex}
-      formIndex={formIndex}
-      setFromBack={setFromBack}
-      fromBack={fromBack}
-    />,
-    <AddressForm
-      setFormIndex={setFormIndex}
-      formIndex={formIndex}
-      setFromBack={setFromBack}
-      fromBack={fromBack}
-    />,
-    <InformationForm
-      setFormIndex={setFormIndex}
-      formIndex={formIndex}
-      setFromBack={setFromBack}
-      fromBack={fromBack}
-    />,
-  ];
+  const { formIndex } = useRegister();
+  const forms = [<LoginForm />, <AddressForm />, <InformationForm />];
 
   return (
     <Container>

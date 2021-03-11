@@ -6,17 +6,19 @@ import * as Yup from 'yup';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import getValidationErrors from '../../../../utils/getValidationErros';
-import { FormProps, LoginProps } from '../..';
 import { AnimatedContainer } from '../../styles';
+import { useRegister, LoginProps } from '../../../../contexts/RegisterContext';
 
-const LoginForm: React.FC<FormProps> = ({
-  setFormIndex,
-  formIndex,
-  fromBack,
-  setFromBack,
-}) => {
+const LoginForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [values, setValues] = useState<LoginProps>({} as LoginProps);
+  const {
+    setFormIndex,
+    setLoginData,
+    formIndex,
+    fromBack,
+    setFromBack,
+    loginData,
+  } = useRegister();
 
   const handleSubmit = useCallback(
     async (data: LoginProps) => {
@@ -29,22 +31,27 @@ const LoginForm: React.FC<FormProps> = ({
             .required('E-mail obrigatório')
             .email('Deve ser um e-mail válido'),
           password: Yup.string().min(8, 'Deve ter no mínimo 8 caracteres'),
+          passwordConfirmation: Yup.string()
+            .required('Confirme sua senha')
+            .oneOf([Yup.ref('password'), null], 'Senhas não correspondem.'),
         });
 
-        // await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
+        setLoginData(data);
         setFromBack(false);
         setFormIndex(formIndex + 1);
       } catch (error) {
-        const errors = getValidationErrors(error);
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+          formRef.current?.setErrors(errors);
 
-        formRef.current?.setErrors(errors);
-
-        setTimeout(() => {
-          formRef.current?.setErrors({});
-        }, 3000);
+          setTimeout(() => {
+            formRef.current?.setErrors({});
+          }, 3000);
+        }
       }
     },
-    [formIndex, setFormIndex, setFromBack],
+    [formIndex, setFormIndex, setFromBack, setLoginData],
   );
 
   return (
@@ -55,8 +62,9 @@ const LoginForm: React.FC<FormProps> = ({
           type="text"
           placeholder="Nome do restaurante"
           icon={FiHome}
-          id="restaurant_name"
+          id="restaurantName"
           name="restaurantName"
+          defaultValue={loginData && loginData.restaurantName}
         />
         <Input
           type="text"
@@ -64,6 +72,7 @@ const LoginForm: React.FC<FormProps> = ({
           icon={FiMail}
           placeholder="Email"
           name="email"
+          defaultValue={loginData && loginData.email}
         />
         <Input
           type="password"
@@ -71,13 +80,15 @@ const LoginForm: React.FC<FormProps> = ({
           icon={FiLock}
           placeholder="Senha"
           name="password"
+          defaultValue={loginData && loginData.password}
         />
         <Input
           type="password"
-          id="password_confirmation"
+          id="passwordConfirmation"
           icon={FiLock}
           placeholder="Confirmação da senha"
           name="passwordConfirmation"
+          defaultValue={loginData && loginData.passwordConfirmation}
         />
 
         <Button type="submit" loading={false}>
