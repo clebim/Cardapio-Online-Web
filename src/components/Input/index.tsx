@@ -29,14 +29,6 @@ const Input: React.FC<InputProps> = ({
   const [isFilled, setIsFilled] = useState(false);
   const { fieldName, defaultValue, error, registerField } = useField(name);
 
-  useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
-  }, [fieldName, registerField]);
-
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
   }, []);

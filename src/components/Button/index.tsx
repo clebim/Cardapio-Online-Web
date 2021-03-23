@@ -14,8 +14,7 @@ const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
       type="button"
       {...rest}
     >
-      {/* <BounceLoader color="#ffffff" loading size={40} /> */}
-      {children}
+      {loading ? <BounceLoader color="#ffffff" size={32} /> : children}
     </Container>
   );
 };

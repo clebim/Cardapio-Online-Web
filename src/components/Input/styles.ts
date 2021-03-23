@@ -10,7 +10,6 @@ export const Container = styled.div`
   span {
     color: #c53030;
     font-weight: 500;
-    display: block;
     margin: 2px 0 0 8px;
     font-size: 12px;
   }
