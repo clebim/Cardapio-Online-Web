@@ -1,7 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { FiMail, FiLock, FiHome, FiLogOut } from 'react-icons/fi';
+import { FiMail, FiLock, FiHome } from 'react-icons/fi';
 import * as Yup from 'yup';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';

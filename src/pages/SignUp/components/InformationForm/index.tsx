@@ -1,10 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { FaPhone, FaMapPin } from 'react-icons/fa';
 import Button from '../../../../components/Button';
-import Input from '../../../../components/Input';
 import { AnimatedContainer } from '../../styles';
 import { ButtonBack, ContainerButtons } from '../AddressForm/styles';
 import {
@@ -13,6 +12,7 @@ import {
 } from '../../../../contexts/RegisterContext';
 import getValidationErrors from '../../../../utils/getValidationErros';
 import api from '../../../../services/api';
+import InputMask from '../../../../components/InputMask';
 
 const InformationForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -43,7 +43,7 @@ const InformationForm: React.FC = () => {
           phone: Yup.string()
             .required('Cidade é obrigatório')
             .max(15, 'Deve ter no máximo 15 caracteres'),
-          zipCode: Yup.string().required('Bairro obrigatório'),
+          zipCode: Yup.string().required('CEP obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -86,17 +86,19 @@ const InformationForm: React.FC = () => {
         style={{ marginBottom: '150px' }}
       >
         <h1>Dados Adicionais</h1>
-        <Input
+        <InputMask
           type="text"
+          mask="(99) 999999999"
           placeholder="Telefone de contato"
           icon={FaPhone}
           id="phone"
           name="phone"
           defaultValue={informationData && informationData.phone}
         />
-        <Input
+        <InputMask
           type="text"
           id="zipCode"
+          mask="99999-999"
           icon={FaMapPin}
           placeholder="CEP"
           name="zipCode"

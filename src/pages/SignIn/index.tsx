@@ -11,6 +11,7 @@ import getValidationErrors from '../../utils/getValidationErros';
 
 import { Container, Content, Background } from './styles';
 import { AnimatedContainer } from '../SignUp/styles';
+import { useAuth } from '../../contexts/Auth/AuthContext';
 
 interface LoginProps {
   email: string;
@@ -19,6 +20,7 @@ interface LoginProps {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { signIn } = useAuth();
 
   const handleSubmit = useCallback(async (data: LoginProps) => {
     try {
@@ -32,6 +34,11 @@ const SignIn: React.FC = () => {
       });
 
       await schema.validate(data, { abortEarly: false });
+
+      await signIn({
+        email: data.email,
+        password: data.password,
+      });
     } catch (error) {
       const errors = getValidationErrors(error);
 

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { AddressProps, InformationProps, LoginProps } from './interfaces';
 
 export interface RegisterContextData {
   formIndex: number;
@@ -11,25 +12,6 @@ export interface RegisterContextData {
   setAddressData: React.Dispatch<React.SetStateAction<AddressProps>>;
   informationData: InformationProps;
   setInformationData: React.Dispatch<React.SetStateAction<InformationProps>>;
-}
-
-export interface LoginProps {
-  restaurantName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
-
-export interface AddressProps {
-  city: string;
-  neighborhood: string;
-  street: string;
-  number: string;
-}
-
-export interface InformationProps {
-  phone: string;
-  zipCode: string;
 }
 
 const RegisterContext = createContext<RegisterContextData>(
@@ -71,7 +53,7 @@ function useRegister(): RegisterContextData {
   const context = useContext(RegisterContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useRegister must be used with in an RegisterProvider');
   }
 
   return context;
