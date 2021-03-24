@@ -1,18 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
-import { AddressProps, InformationProps, LoginProps } from './interfaces';
-
-export interface RegisterContextData {
-  formIndex: number;
-  setFormIndex: React.Dispatch<React.SetStateAction<number>>;
-  fromBack: boolean;
-  setFromBack: React.Dispatch<React.SetStateAction<boolean>>;
-  loginData: LoginProps;
-  setLoginData: React.Dispatch<React.SetStateAction<LoginProps>>;
-  addressData: AddressProps;
-  setAddressData: React.Dispatch<React.SetStateAction<AddressProps>>;
-  informationData: InformationProps;
-  setInformationData: React.Dispatch<React.SetStateAction<InformationProps>>;
-}
+import {
+  AddressProps,
+  InformationProps,
+  LoginProps,
+  RegisterContextData,
+} from './interfaces';
 
 const RegisterContext = createContext<RegisterContextData>(
   {} as RegisterContextData,

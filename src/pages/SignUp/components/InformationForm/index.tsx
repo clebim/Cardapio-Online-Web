@@ -6,13 +6,11 @@ import { FaPhone, FaMapPin } from 'react-icons/fa';
 import Button from '../../../../components/Button';
 import { AnimatedContainer } from '../../styles';
 import { ButtonBack, ContainerButtons } from '../AddressForm/styles';
-import {
-  InformationProps,
-  useRegister,
-} from '../../../../contexts/RegisterContext';
 import getValidationErrors from '../../../../utils/getValidationErros';
 import api from '../../../../services/api';
 import InputMask from '../../../../components/InputMask';
+import { useRegister } from '../../../../contexts/Register/RegisterContext';
+import { InformationProps } from '../../../../contexts/Register/interfaces';
 
 const InformationForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

@@ -7,11 +7,9 @@ import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import { ButtonBack, ContainerButtons } from './styles';
 import { AnimatedContainer } from '../../styles';
-import {
-  useRegister,
-  AddressProps,
-} from '../../../../contexts/RegisterContext';
+import { useRegister } from '../../../../contexts/Register/RegisterContext';
 import getValidationErrors from '../../../../utils/getValidationErros';
+import { AddressProps } from '../../../../contexts/Register/interfaces';
 
 const AddressForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

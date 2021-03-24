@@ -1,19 +1,12 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useCallback, useRef, useState } from 'react';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
-import { FiMail, FiLock, FiHome, FiLogOut } from 'react-icons/fi';
-import * as Yup from 'yup';
+import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import getValidationErrors from '../../utils/getValidationErros';
 
 import { Container, Content, Background, Step, NumberStep } from './styles';
 import LoginForm from './components/LoginForm';
 import AddressForm from './components/AddressForm';
 import InformationForm from './components/InformationForm';
-import { useRegister } from '../../contexts/RegisterContext';
+import { useRegister } from '../../contexts/Register/RegisterContext';
 
 const SignUp: React.FC = () => {
   const { formIndex } = useRegister();

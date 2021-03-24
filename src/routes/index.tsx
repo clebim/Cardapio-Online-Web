@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import { RegisterProvider } from '../contexts/RegisterContext';
+import { RegisterProvider } from '../contexts/Register/RegisterContext';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 

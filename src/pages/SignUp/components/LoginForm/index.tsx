@@ -7,7 +7,8 @@ import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import getValidationErrors from '../../../../utils/getValidationErros';
 import { AnimatedContainer } from '../../styles';
-import { useRegister, LoginProps } from '../../../../contexts/RegisterContext';
+import { useRegister } from '../../../../contexts/Register/RegisterContext';
+import { LoginProps } from '../../../../contexts/Register/interfaces';
 
 const LoginForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
