@@ -3,6 +3,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { FaPhone, FaMapPin } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 import Button from '../../../../components/Button';
 import { AnimatedContainer } from '../../styles';
 import { ButtonBack, ContainerButtons } from '../AddressForm/styles';
@@ -15,6 +16,7 @@ import { InformationProps } from '../../../../contexts/Register/interfaces';
 const InformationForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const {
     setFormIndex,
     formIndex,
@@ -60,6 +62,8 @@ const InformationForm: React.FC = () => {
           zip_code: informationData.zipCode,
         });
         setLoading(false);
+
+        history.push('/sign_in');
       } catch (error) {
         setLoading(false);
         if (error instanceof Yup.ValidationError) {
@@ -69,11 +73,19 @@ const InformationForm: React.FC = () => {
             formRef.current?.setErrors({});
           }, 3000);
         } else {
+          // eslint-disable-next-line no-console
           console.log(error.response.data.message);
         }
       }
     },
-    [setInformationData, setLoading, addressData, loginData, informationData],
+    [
+      setInformationData,
+      setLoading,
+      addressData,
+      loginData,
+      informationData,
+      history,
+    ],
   );
 
   return (
