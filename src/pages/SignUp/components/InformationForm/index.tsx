@@ -12,11 +12,13 @@ import api from '../../../../services/api';
 import InputMask from '../../../../components/InputMask';
 import { useRegister } from '../../../../contexts/Register/RegisterContext';
 import { InformationProps } from '../../../../contexts/Register/interfaces';
+import { useToast } from '../../../../contexts/Toast';
 
 const InformationForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const { addToast } = useToast();
   const {
     setFormIndex,
     formIndex,
@@ -73,8 +75,11 @@ const InformationForm: React.FC = () => {
             formRef.current?.setErrors({});
           }, 3000);
         } else {
-          // eslint-disable-next-line no-console
-          console.log(error.response.data.message);
+          addToast({
+            type: 'error',
+            title: 'Erro no registro',
+            description: 'Ocorreu um error ao fazer o registro.',
+          });
         }
       }
     },
@@ -85,6 +90,7 @@ const InformationForm: React.FC = () => {
       loginData,
       informationData,
       history,
+      addToast,
     ],
   );
 
