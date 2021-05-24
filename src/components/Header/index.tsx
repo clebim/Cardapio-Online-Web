@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <Container>
       <Logo>
         <FaUtensils size={56} color="#f6f7fa" />
-        <h1>Menu Online</h1>
+        <h1>Cardápio Online</h1>
       </Logo>
       <Perfil>
         <span>Olá, restaurando do clebim</span>

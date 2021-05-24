@@ -1126,7 +1126,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.3.1":
+"@babel/runtime@^7.13.17", "@babel/runtime@^7.3.1":
   version "7.14.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
   integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
@@ -1994,6 +1994,13 @@
   integrity sha512-0bhXQwHYfMeJlCh7mGhc0VJTRm0Gk+Z8T00aiP4702mDUuLs9SMhnd2DitpjWFjdOecx2UXtICK14H9iMnziGA==
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-scroll@^1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@types/react-scroll/-/react-scroll-1.8.2.tgz#44bbbadabb9014517eb865d6fa47937535a2234a"
+  integrity sha512-oavV6BZLfaIghX4JSmrm6mJkeVayQlmsFx1Rz8ffGjMngHAI/juZkRZM/zV/H5D0pGqjzACvBmKYUU4YBecwLg==
+  dependencies:
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17.0.0":
@@ -7435,6 +7442,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
+
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
@@ -8532,12 +8544,12 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-polished@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-4.1.1.tgz#40442cc973348e466f2918cdf647531bb6c29bfb"
-  integrity sha512-4MZTrfPMPRLD7ac8b+2JZxei58zw6N1hFkdBDERif5Tlj19y3vPoPusrLG+mJIlPTGnUlKw3+yWz0BazvMx1vg==
+polished@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-4.1.2.tgz#c04fcc203e287e2d866e9cfcaf102dae1c01a816"
+  integrity sha512-jq4t3PJUpVRcveC53nnbEX35VyQI05x3tniwp26WFdm1dwaNUBHAi5awa/roBlwQxx1uRhwNSYeAi/aMbfiJCQ==
   dependencies:
-    "@babel/runtime" "^7.12.5"
+    "@babel/runtime" "^7.13.17"
 
 portfinder@^1.0.26:
   version "1.0.28"
@@ -9656,6 +9668,14 @@ react-scripts@4.0.3:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
+
+react-scroll@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.8.2.tgz#68e35b74ae296c88e7863393c9fd49f05afa29f5"
+  integrity sha512-f2ZEG5fsPbPTySI9ekcFpETCcNlqbmwbQj9hhzYK8tkgv+PA8APatSt66o/q0KSkDZxyT98ONTtXp9x0lyowEw==
+  dependencies:
+    lodash.throttle "^4.1.1"
+    prop-types "^15.7.2"
 
 react-spinners@^0.10.6:
   version "0.10.6"
