@@ -22,8 +22,8 @@ export interface InformationProps {
 export interface RegisterContextData {
   formIndex: number;
   setFormIndex: React.Dispatch<React.SetStateAction<number>>;
-  fromBack: boolean;
-  setFromBack: React.Dispatch<React.SetStateAction<boolean>>;
+  fromBack: number;
+  setFromBack: React.Dispatch<React.SetStateAction<number>>;
   loginData: LoginProps;
   setLoginData: React.Dispatch<React.SetStateAction<LoginProps>>;
   addressData: AddressProps;

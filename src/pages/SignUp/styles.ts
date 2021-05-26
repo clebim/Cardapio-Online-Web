@@ -7,7 +7,7 @@ interface PropsSpan {
 }
 
 interface AnimatedContainerInterface {
-  from: boolean;
+  from: number;
 }
 
 export const Container = styled.div`

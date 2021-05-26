@@ -12,7 +12,7 @@ const RegisterContext = createContext<RegisterContextData>(
 
 const RegisterProvider: React.FC = ({ children }) => {
   const [formIndex, setFormIndex] = useState(0);
-  const [fromBack, setFromBack] = useState(false);
+  const [fromBack, setFromBack] = useState(0);
   const [loginData, setLoginData] = useState<LoginProps>({} as LoginProps);
   const [addressData, setAddressData] = useState<AddressProps>(
     {} as AddressProps,

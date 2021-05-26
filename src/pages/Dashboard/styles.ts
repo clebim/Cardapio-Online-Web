@@ -72,6 +72,8 @@ export const Content = styled.div`
 
 export const Section = styled.section`
   width: 100%;
+  border-bottom: 1px solid white;
+  padding-bottom: 2rem;
 
   & + section {
     margin-top: 2.5rem;
@@ -124,10 +126,9 @@ export const Details = styled.div`
 
   p {
     font-size: 0.875rem;
-    max-width: 90%;
+    max-width: 95%;
     text-overflow: ellipsis;
     overflow: hidden;
-    display: -webkit-box;
     word-break: break-word;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -153,7 +154,6 @@ export const ImageContainer = styled.div`
 `;
 
 export const Footer = styled.footer`
-  border-top: 1px solid #ffffff;
   margin: 2rem 4rem;
   padding-top: 2rem;
 `;
@@ -186,7 +186,6 @@ export const Social = styled.div`
 
 export const Copyright = styled.footer`
   margin-top: 2rem;
-  border-top: 1px solid white;
   padding-top: 2rem;
 
   display: grid;

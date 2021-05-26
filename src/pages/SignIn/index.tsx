@@ -67,7 +67,7 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Content>
-        <AnimatedContainer from={false}>
+        <AnimatedContainer from={0}>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu login na plataforma</h1>
             <Input

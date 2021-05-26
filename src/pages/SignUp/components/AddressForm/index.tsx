@@ -23,7 +23,7 @@ const AddressForm: React.FC = () => {
   } = useRegister();
 
   const handleBackForm = useCallback(() => {
-    setFromBack(true);
+    setFromBack(1);
     setFormIndex(formIndex - 1);
   }, [setFormIndex, formIndex, setFromBack]);
 
@@ -43,7 +43,7 @@ const AddressForm: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         setAddressData(data);
-        setFromBack(false);
+        setFromBack(0);
         setFormIndex(formIndex + 1);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {

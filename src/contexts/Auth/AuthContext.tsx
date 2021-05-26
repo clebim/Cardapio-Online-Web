@@ -16,6 +16,7 @@ const AuthProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem('@MenuOnline:user');
 
     if (accessToken && refreshToken && user) {
+      api.defaults.headers.Authorization = `Bearer ${accessToken}`;
       return {
         tokens: { access_token: accessToken, refresh_token: refreshToken },
         user: JSON.parse(user),
@@ -35,6 +36,8 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@MenuOnline:access_token', tokens.access_token);
     localStorage.setItem('@MenuOnline:refresh_token', tokens.refresh_token);
     localStorage.setItem('@MenuOnline:user', JSON.stringify(user));
+
+    api.defaults.headers.Authorization = `Bearer ${tokens.access_token}`;
 
     setData({ tokens, user });
   }, []);

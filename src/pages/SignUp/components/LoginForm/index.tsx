@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         setLoginData(data);
-        setFromBack(false);
+        setFromBack(0);
         setFormIndex(formIndex + 1);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {

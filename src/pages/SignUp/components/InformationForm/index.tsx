@@ -31,7 +31,7 @@ const InformationForm: React.FC = () => {
   } = useRegister();
 
   const handleBackForm = useCallback(() => {
-    setFromBack(true);
+    setFromBack(0);
     setFormIndex(formIndex - 1);
   }, [setFormIndex, formIndex, setFromBack]);
 

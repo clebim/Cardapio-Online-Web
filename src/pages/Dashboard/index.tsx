@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable camelcase */
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi';
 import { FaUtensils } from 'react-icons/fa';
@@ -21,281 +22,108 @@ import {
   Social,
   Copyright,
 } from './styles';
+import api from '../../services/api';
+import { useToast } from '../../contexts/Toast';
+
+interface ItemMenu {
+  id: number;
+  menu_section_id: number;
+  item_name: string;
+  price: string;
+  description: string;
+  observation: string | null;
+  sold_off: boolean;
+  photo: {
+    id: number;
+    real_name: string;
+    path: string;
+    menu_item_id: number;
+  };
+}
+
+interface SectionMenu {
+  id: number;
+  user_id: number;
+  section_name: string;
+  is_active: string;
+  items: ItemMenu[];
+}
+
+interface ListItemsClient {
+  success: boolean;
+  message: string;
+  items: SectionMenu[];
+}
 
 const Dashboard: React.FC = () => {
+  const { addToast } = useToast();
+  const [list, setList] = useState<SectionMenu[]>([] as SectionMenu[]);
+
+  useEffect(() => {
+    async function getItems(): Promise<void> {
+      try {
+        const response = await api.get<ListItemsClient>('/items/index');
+
+        setList(response.data.items);
+      } catch (error) {
+        addToast({
+          title: 'Erro na busca',
+          description: 'Erro ao buscar a lista no servidor',
+          type: 'error',
+        });
+      }
+    }
+
+    getItems();
+  }, [addToast]);
+
   return (
     <>
       <Header />
       <Container>
         <HeaderContainer>
           <ListSections>
-            <Link
-              spy
-              smooth
-              duration={500}
-              offset={-200}
-              to="section_1"
-              activeClass="active"
-            >
-              section1
-            </Link>
-            <Link
-              spy
-              smooth
-              duration={500}
-              offset={-200}
-              to="section_2"
-              activeClass="active"
-            >
-              section2
-            </Link>
-            <Link
-              spy
-              smooth
-              duration={500}
-              offset={-200}
-              to="section_3"
-              activeClass="active"
-            >
-              section3
-            </Link>
-            <Link
-              spy
-              smooth
-              duration={500}
-              offset={-200}
-              to="section_4"
-              activeClass="active"
-            >
-              section4
-            </Link>
+            {list.map((data) => (
+              <Link
+                key={data.id}
+                spy
+                smooth
+                duration={500}
+                offset={-250}
+                to={data.id.toString()}
+                activeClass="active"
+              >
+                {data.section_name}
+              </Link>
+            ))}
           </ListSections>
           <ButtonContainer>
             <button type="button">Adicionar seção</button>
           </ButtonContainer>
         </HeaderContainer>
         <Content>
-          <Section id="section_1">
-            <TitleContainer>
-              <h2>Refrigerante</h2>
-              <button type="button">Adicionar item</button>
-            </TitleContainer>
-            <ItemContainer>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, com bastante
-                    blabbla punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-            </ItemContainer>
-          </Section>
-          <Section id="section_2">
-            <TitleContainer>
-              <h2>Hamburgues</h2>
-              <button type="button">Adicionar item</button>
-            </TitleContainer>
-            <ItemContainer>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>Pão brioche, burger black angus 100g,</p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, com bastante
-                    blabbla punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-            </ItemContainer>
-          </Section>
-          <Section id="section_3">
-            <TitleContainer>
-              <h2>Refrigerante</h2>
-              <button type="button">Adicionar item</button>
-            </TitleContainer>
-            <ItemContainer>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, com bastante
-                    blabbla punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-            </ItemContainer>
-          </Section>
-          <Section id="section_4">
-            <TitleContainer>
-              <h2>Refrigerante</h2>
-              <button type="button">Adicionar item</button>
-            </TitleContainer>
-            <ItemContainer>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, c roxa e
-                    molho punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-              <Item>
-                <Details>
-                  <h3>CHEESEBURGER</h3>
-                  <p>
-                    Pão brioche, burger black angus 100g, cheddar, com bastante
-                    blabbla punch
-                  </p>
-                  <span>R$ 29,90</span>
-                </Details>
-                <ImageContainer>
-                  <img
-                    src="https://st3.depositphotos.com/1000504/19178/i/600/depositphotos_191783046-stock-photo-fresh-tasty-burger.jpg"
-                    alt="teste"
-                  />
-                </ImageContainer>
-              </Item>
-            </ItemContainer>
-          </Section>
+          {list.map((data) => (
+            <Section id={data.id.toString()} key={data.id}>
+              <TitleContainer>
+                <h2>{data.section_name}</h2>
+                <button type="button">Adicionar item</button>
+              </TitleContainer>
+              <ItemContainer>
+                {data.items.map((item) => (
+                  <Item key={item.id}>
+                    <Details>
+                      <h3>{item.item_name}</h3>
+                      <p>{item.description}</p>
+                      <span>R$ {item.price}</span>
+                    </Details>
+                    <ImageContainer>
+                      <img src={item.photo.path} alt={item.photo.real_name} />
+                    </ImageContainer>
+                  </Item>
+                ))}
+              </ItemContainer>
+            </Section>
+          ))}
         </Content>
       </Container>
       <Footer>
