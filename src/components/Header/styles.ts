@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: sticky;
-  z-index: 10; /* Set the navbar to fixed position */
-  top: 0;
+  /* Set the navbar to fixed position */
   width: 100vw;
   height: 6rem;
   background-color: #7c40ff;

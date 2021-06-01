@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-scroll';
-import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi';
+import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
 import { FaUtensils } from 'react-icons/fa';
 import Header from '../../components/Header';
 import './styles.css';
@@ -24,6 +24,8 @@ import {
 } from './styles';
 import api from '../../services/api';
 import { useToast } from '../../contexts/Toast';
+import Modal from '../../components/Modal';
+import ModalSection from './components/ModalSection';
 
 interface ItemMenu {
   id: number;
@@ -58,29 +60,38 @@ interface ListItemsClient {
 const Dashboard: React.FC = () => {
   const { addToast } = useToast();
   const [list, setList] = useState<SectionMenu[]>([] as SectionMenu[]);
+  const [open, setOpen] = useState<boolean>(false);
+
+  function openModal(): void {
+    setOpen(!open);
+  }
+
+  const getItems = useCallback(async () => {
+    try {
+      const response = await api.get<ListItemsClient>('/items/index');
+
+      setList(response.data.items);
+    } catch (error) {
+      addToast({
+        title: 'Erro na busca',
+        description: 'Erro ao buscar a lista no servidor',
+        type: 'error',
+      });
+    }
+  }, [addToast]);
 
   useEffect(() => {
-    async function getItems(): Promise<void> {
-      try {
-        const response = await api.get<ListItemsClient>('/items/index');
-
-        setList(response.data.items);
-      } catch (error) {
-        addToast({
-          title: 'Erro na busca',
-          description: 'Erro ao buscar a lista no servidor',
-          type: 'error',
-        });
-      }
-    }
-
     getItems();
-  }, [addToast]);
+  }, [getItems]);
 
   return (
     <>
       <Header />
       <Container>
+        <Modal showModal={open} setShowModal={setOpen} width={800} height={160}>
+          <ModalSection setOpen={setOpen} getItemsDashboard={getItems} />
+        </Modal>
+
         <HeaderContainer>
           <ListSections>
             {list.map((data) => (
@@ -98,7 +109,9 @@ const Dashboard: React.FC = () => {
             ))}
           </ListSections>
           <ButtonContainer>
-            <button type="button">Adicionar seção</button>
+            <button onClick={openModal} type="button">
+              Adicionar seção
+            </button>
           </ButtonContainer>
         </HeaderContainer>
         <Content>

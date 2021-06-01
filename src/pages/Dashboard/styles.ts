@@ -16,8 +16,8 @@ export const HeaderContainer = styled.div`
   background-color: #1e2026;
   border-bottom: 1px solid white;
   position: sticky;
-  z-index: 7;
-  top: 6rem;
+  z-index: 3;
+  top: 0;
   padding: 1rem 0;
 `;
 export const ButtonContainer = styled.div`
@@ -50,7 +50,7 @@ export const ListSections = styled.div`
   a {
     text-decoration: none;
     color: #c4c2c5;
-    z-index: 7;
+    z-index: 3;
     cursor: pointer;
 
     &:first-child {
