@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
+import { boolean } from 'yup/lib/locale';
 
-export const Background = styled.div`
+interface IsActive {
+  showModal: boolean;
+}
+
+export const Background = styled.div<IsActive>`
   width: 100%;
   height: 100%;
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: ${(props) => (props.showModal ? 3 : 0)};
 `;
 
 interface Wrapper {

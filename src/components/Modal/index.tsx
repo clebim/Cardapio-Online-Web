@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({
   }, [keyPress]);
 
   return (
-    <Background onClick={closeModal} ref={modalRef}>
+    <Background onClick={closeModal} ref={modalRef} showModal={showModal}>
       <animated.div style={animation}>
         <ModalWrapper width={width} height={height} showModal={showModal}>
           {children}
